@@ -66,7 +66,17 @@ export default function BeincomApiGuide() {
             <p className="mb-4">When directing users to Beincom&apos;s signup page, include the following query parameters:</p>
             
             <div className="bg-slate-900 text-slate-200 p-5 rounded-lg overflow-x-auto my-4 font-mono text-sm">
-              https://signup.beincom.com?partnerId=&#123;your-partner-id&#125;&memberId=&#123;optional-member-id&#125;&callbackData=&#123;optional-callback-data&#125;
+              https://signup.beincom.com?partnerId=&#123;your-partner-id&#125;&memberId=&#123;optional-member-id&#125;&extra=&#123;optional-extra-data&#125;
+            </div>
+            
+            <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 my-4 rounded-r-lg">
+              <h4 className="font-medium mb-2 text-yellow-800">⚠️ Important URL Parameter Guidelines</h4>
+              <ul className="list-disc list-inside space-y-1 text-sm">
+                <li><strong>String Values Only:</strong> All parameters must be passed as URL-encoded string values</li>
+                <li><strong>URL Encoding:</strong> Ensure special characters are properly encoded (spaces → %20, etc.)</li>
+                <li><strong>Length Limits:</strong> Keep parameter values under 2048 characters to avoid URL length issues</li>
+                <li><strong>JSON Data:</strong> For complex data, stringify JSON objects and URL-encode the result</li>
+              </ul>
             </div>
 
             <h4 className="font-medium mb-3">Query Parameters</h4>
@@ -90,14 +100,30 @@ export default function BeincomApiGuide() {
                   <tr>
                     <td className="border border-slate-300 p-3"><code>memberId</code></td>
                     <td className="border border-slate-300 p-3">❌ No</td>
-                    <td className="border border-slate-300 p-3">Your internal user/member identifier for tracking</td>
-                    <td className="border border-slate-300 p-3">user-456</td>
+                    <td className="border border-slate-300 p-3">
+                      Your system's member identifier. Can be:
+                      <ul className="mt-1 text-sm list-disc list-inside">
+                        <li>User ID from your system</li>
+                        <li>Email address</li>
+                        <li>Username</li>
+                        <li>Any unique identifier</li>
+                      </ul>
+                    </td>
+                    <td className="border border-slate-300 p-3">user-456<br/>user@email.com<br/>john_doe</td>
                   </tr>
                   <tr>
-                    <td className="border border-slate-300 p-3"><code>callbackData</code></td>
+                    <td className="border border-slate-300 p-3"><code>extra</code></td>
                     <td className="border border-slate-300 p-3">❌ No</td>
-                    <td className="border border-slate-300 p-3">Additional data for your business logic (JSON string)</td>
-                    <td className="border border-slate-300 p-3">&#123;&quot;campaign&quot;:&quot;summer2024&quot;&#125;</td>
+                    <td className="border border-slate-300 p-3">
+                      Additional metadata for your business logic. This data will be:
+                      <ul className="mt-1 text-sm list-disc list-inside">
+                        <li>Returned in API responses</li>
+                        <li>Included in webhook payloads</li>
+                        <li>Available for tracking & analytics</li>
+                      </ul>
+                      <em>Format: URL-encoded JSON string</em>
+                    </td>
+                    <td className="border border-slate-300 p-3">%7B%22campaign%22%3A%22summer2024%22%7D<br/><small>(URL-encoded JSON)</small></td>
                   </tr>
                 </tbody>
               </table>
@@ -105,7 +131,13 @@ export default function BeincomApiGuide() {
           </div>
 
           <div className="bg-orange-50 border-l-4 border-orange-500 p-4 my-5 rounded-r-lg">
-            <strong>Important:</strong> The <code>partnerId</code> parameter is essential for referral tracking. Without it, the user signup won&apos;t be attributed to your partnership.
+            <h4 className="font-medium mb-2">🔥 Critical Implementation Notes</h4>
+            <ul className="list-disc list-inside space-y-1 text-sm">
+              <li><strong>partnerId is mandatory:</strong> Without it, signup won't be attributed to your partnership</li>
+              <li><strong>memberId flexibility:</strong> Use any identifier that makes sense for your system (user ID, email, username, etc.)</li>
+              <li><strong>extra data persistence:</strong> Data passed in the extra parameter will be available in both API responses and webhook callbacks</li>
+              <li><strong>URL encoding:</strong> Always URL-encode parameter values, especially JSON data</li>
+            </ul>
           </div>
         </section>
 
@@ -182,7 +214,7 @@ export default function BeincomApiGuide() {
             &nbsp;&nbsp;&#125;,<br />
             &nbsp;&nbsp;&quot;transactionId&quot;: &quot;txn_abc123&quot;,<br />
             &nbsp;&nbsp;&quot;createdAt&quot;: &quot;2024-01-15T10:30:00Z&quot;,<br />
-            &nbsp;&nbsp;&quot;callbackData&quot;: &#123;<br />
+            &nbsp;&nbsp;&quot;extra&quot;: &#123;<br />
             &nbsp;&nbsp;&nbsp;&nbsp;&quot;campaign&quot;: &quot;summer2024&quot;<br />
             &nbsp;&nbsp;&#125;<br />
             &#125;
@@ -212,7 +244,11 @@ export default function BeincomApiGuide() {
             <h4 className="font-medium mb-3">1. Direct User to Signup</h4>
             <div className="bg-slate-900 text-slate-200 p-5 rounded-lg overflow-x-auto my-4 font-mono text-sm">
               {/* JavaScript example */}<br />
-              const signupUrl = `https://signup.beincom.com?partnerId=$&#123;PARTNER_ID&#125;&memberId=$&#123;userId&#125;&callbackData=$&#123;encodeURIComponent(JSON.stringify(&#123;source: &apos;mobile_app&apos;, campaign: &apos;Q1_2024&apos;&#125;))&#125;`;<br />
+              // Example with user ID as memberId
+              const signupUrl1 = `https://signup.beincom.com?partnerId=$&#123;PARTNER_ID&#125;&memberId=$&#123;userId&#125;&extra=$&#123;encodeURIComponent(JSON.stringify(&#123;source: &apos;mobile_app&apos;, campaign: &apos;Q1_2024&apos;&#125;))&#125;`;
+              
+              // Example with email as memberId
+              const signupUrl2 = `https://signup.beincom.com?partnerId=$&#123;PARTNER_ID&#125;&memberId=$&#123;encodeURIComponent(userEmail)&#125;&extra=$&#123;encodeURIComponent(JSON.stringify(&#123;referralCode: &apos;ABC123&apos;&#125;))&#125;`;<br />
               window.location.href = signupUrl;
             </div>
           </div>

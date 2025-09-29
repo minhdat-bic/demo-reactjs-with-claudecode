@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { demoExamples } from "@/data/examples";
 import TodoDemo from "@/components/TodoDemo";
 import BeincomApiGuide from "@/components/BeincomApiGuide";
+import BeincomPartnerGuideV2 from "@/components/BeincomPartnerGuideV2";
 
 interface ExamplePageProps {
   params: Promise<{
@@ -46,7 +47,7 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className={`${example.name === 'beincom-partner-guide-v2' ? 'max-w-full' : 'max-w-4xl'} mx-auto px-4 sm:px-6 lg:px-8 py-8`}>
         {/* Hero Section */}
         <div className="text-center mb-12">
           <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br ${example.gradient} mb-6`}>
@@ -80,20 +81,26 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
         </div>
 
         {/* Demo Container */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden mb-8">
-          <div className="bg-slate-50 dark:bg-slate-700 px-6 py-4 border-b border-slate-200 dark:border-slate-600">
-            <div className="flex items-center gap-3">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                <div className="w-3 h-3 rounded-full bg-green-400"></div>
-              </div>
-              <div className="text-sm text-slate-600 dark:text-slate-400 font-mono">
-                {example.name}.demo
+        {example.name === 'beincom-partner-guide-v2' ? (
+          <div className="mb-8">
+            {/* Render specific demo or generic placeholder */}
+            <BeincomPartnerGuideV2 />
+          </div>
+        ) : (
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden mb-8">
+            <div className="bg-slate-50 dark:bg-slate-700 px-6 py-4 border-b border-slate-200 dark:border-slate-600">
+              <div className="flex items-center gap-3">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                </div>
+                <div className="text-sm text-slate-600 dark:text-slate-400 font-mono">
+                  {example.name}.demo
+                </div>
               </div>
             </div>
-          </div>
-          <div className="p-8">
+            <div className="p-8">
             {/* Render specific demo or generic placeholder */}
             {example.name === 'todo-app' ? (
               <TodoDemo />
@@ -130,8 +137,9 @@ export default async function ExamplePage({ params }: ExamplePageProps) {
                 </div>
               </div>
             )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Additional Info */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

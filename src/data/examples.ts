@@ -83,6 +83,18 @@ export const demoExamples: DemoExample[] = [
     icon: "📚",
     gradient: "from-indigo-500 to-purple-600",
   },
+  {
+    id: "beincom-partner-guide-v2",
+    name: "beincom-partner-guide-v2",
+    title: "Beincom Partner Integration v2",
+    description:
+      "Comprehensive partner integration guide with webhooks, analytics, and detailed examples for multiple platforms",
+    category: "Documentation",
+    difficulty: "Advanced",
+    tags: ["Partner API", "Webhooks", "Analytics", "Integration"],
+    icon: "🤝",
+    gradient: "from-purple-500 to-pink-600",
+  },
 ];
 
 export const categories = Array.from(
