@@ -1,18 +1,22 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
 import { demoExamples, categories } from "@/data/examples";
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const filteredExamples = demoExamples.filter(example => {
-    const matchesCategory = selectedCategory === 'All' || example.category === selectedCategory;
-    const matchesSearch = example.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         example.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         example.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredExamples = demoExamples.filter((example) => {
+    const matchesCategory =
+      selectedCategory === "All" || example.category === selectedCategory;
+    const matchesSearch =
+      example.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      example.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      example.tags.some((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     return matchesCategory && matchesSearch;
   });
 
@@ -51,8 +55,10 @@ export default function Home() {
               className="px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="All">All Categories</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
               ))}
             </select>
           </div>
@@ -103,8 +109,18 @@ export default function Home() {
                     </div>
                     <div className="flex items-center gap-1 text-purple-600 dark:text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity">
                       <span className="text-sm font-medium">Open</span>
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -112,7 +128,9 @@ export default function Home() {
                     Beincom Partner Integration
                   </h3>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">
-                    Complete guide for integrating with Beincom's partner API. Includes user referrals, webhooks, event tracking, and code examples.
+                    Complete guide for integrating with Beincom&apos;s partner
+                    API. Includes user referrals, webhooks, event tracking, and
+                    code examples.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs rounded-md font-medium">
@@ -134,7 +152,8 @@ export default function Home() {
                     More Guides Coming Soon
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-500">
-                    Additional integration examples and documentation will be added here
+                    Additional integration examples and documentation will be
+                    added here
                   </p>
                 </div>
               </div>
@@ -144,8 +163,9 @@ export default function Home() {
                   <span className="text-xl">💡</span>
                   <div className="flex-1">
                     <p className="text-sm text-slate-700 dark:text-slate-300">
-                      <strong>Tip:</strong> These are standalone HTML pages with complete, self-contained documentation.
-                      Perfect for sharing with team members or embedding in other platforms.
+                      <strong>Tip:</strong> These are standalone HTML pages with
+                      complete, self-contained documentation. Perfect for
+                      sharing with team members or embedding in other platforms.
                     </p>
                   </div>
                 </div>
@@ -174,7 +194,9 @@ export default function Home() {
           {filteredExamples.map((example) => (
             <Link key={example.id} href={`/example/${example.name}`}>
               <div className="group bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 overflow-hidden hover:scale-105">
-                <div className={`h-32 bg-gradient-to-br ${example.gradient} flex items-center justify-center`}>
+                <div
+                  className={`h-32 bg-gradient-to-br ${example.gradient} flex items-center justify-center`}
+                >
                   <span className="text-4xl">{example.icon}</span>
                 </div>
                 <div className="p-6">
@@ -182,11 +204,15 @@ export default function Home() {
                     <h3 className="text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {example.title}
                     </h3>
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                      example.difficulty === 'Beginner' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' :
-                      example.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300' :
-                      'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full ${
+                        example.difficulty === "Beginner"
+                          ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"
+                          : example.difficulty === "Intermediate"
+                          ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300"
+                          : "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300"
+                      }`}
+                    >
                       {example.difficulty}
                     </span>
                   </div>
