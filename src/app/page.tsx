@@ -71,6 +71,104 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Static Demo Pages Section */}
+        <div className="mb-12">
+          <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl border-2 border-purple-200 dark:border-purple-700 overflow-hidden">
+            <div className="p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg p-2">
+                  <span className="text-2xl">📄</span>
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                    Static Integration Guides
+                  </h2>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    Complete documentation and integration examples
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                {/* Beincom Partner Integration Card */}
+                <a
+                  href="/bic-partner-integration"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-white dark:bg-slate-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-purple-200 dark:border-purple-700 hover:scale-105 hover:border-purple-400 dark:hover:border-purple-500"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg p-3">
+                      <span className="text-3xl">🚀</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-purple-600 dark:text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-sm font-medium">Open</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    Beincom Partner Integration
+                  </h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2">
+                    Complete guide for integrating with Beincom's partner API. Includes user referrals, webhooks, event tracking, and code examples.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs rounded-md font-medium">
+                      API Integration
+                    </span>
+                    <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs rounded-md font-medium">
+                      Webhooks
+                    </span>
+                    <span className="px-2 py-1 bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 text-xs rounded-md font-medium">
+                      Documentation
+                    </span>
+                  </div>
+                </a>
+
+                {/* Placeholder for future static pages */}
+                <div className="bg-white/50 dark:bg-slate-800/50 rounded-xl p-6 border-2 border-dashed border-slate-300 dark:border-slate-600 flex flex-col items-center justify-center text-center min-h-[240px]">
+                  <div className="text-4xl mb-3 opacity-50">➕</div>
+                  <h3 className="text-base font-semibold text-slate-600 dark:text-slate-400 mb-1">
+                    More Guides Coming Soon
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-500">
+                    Additional integration examples and documentation will be added here
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 p-4 bg-white/60 dark:bg-slate-800/60 rounded-lg border border-purple-200 dark:border-purple-700">
+                <div className="flex items-start gap-3">
+                  <span className="text-xl">💡</span>
+                  <div className="flex-1">
+                    <p className="text-sm text-slate-700 dark:text-slate-300">
+                      <strong>Tip:</strong> These are standalone HTML pages with complete, self-contained documentation.
+                      Perfect for sharing with team members or embedding in other platforms.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Interactive Demos Section Header */}
+        <div className="mb-6">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg p-2">
+              <span className="text-2xl">⚡</span>
+            </div>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+              Interactive Demos
+            </h2>
+          </div>
+          <p className="text-slate-600 dark:text-slate-400 ml-14">
+            Try out live examples and interactive components
+          </p>
+        </div>
+
         {/* Demo Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredExamples.map((example) => (
